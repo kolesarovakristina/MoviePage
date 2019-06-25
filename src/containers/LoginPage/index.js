@@ -1,72 +1,75 @@
 import React from "react";
 import FormInput from "../../components/FormInput";
-import {
-  StyledWrapper,
-  StyledButton
-} from "./styles";
+import { StyledWrapper, StyledButton } from "./styles";
 import axios from "axios";
-// import base64 from "base-64";
-// import { withRouter } from "react-router-dom";
-
+import { withRouter } from "react-router-dom";
+// import { saveTokenToLocalStorage } from "../../utils";
 
 class LoginPage extends React.Component {
-    state={
-        username:"",
-        password:"",
-        token:""
-    }
-    handleUserNameInput = e => {
+  state = {
+    username: "",
+    password: "",
+    error: null
+  };
+  handleUserNameInput = e => {
     this.setState({ username: e.target.value });
-      };
-    
-    handleUserPasswordInput = e => {
+  };
+
+  handleUserPasswordInput = e => {
     this.setState({ password: e.target.value });
-      };
+  };
 
-      onSubmit = async event => {
-        event.preventDefault();
-        const form = new FormData();
-        form.append("username", `${this.state.username}`);
-        form.append("password", `${this.state.password}`);
-        try {
-          const response = await axios({
-            method: "post",
-            url: "http://wdassignment.devfl.com/api/login",
-            data: form,
-            config: { headers: { 
-                'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + this.state.token,
-         }}
-
-          });
-          console.log(response)
-        //  this.props.history.push("/")
-        } catch (err) {
-          console.log(err);
+  onSubmit = async event => {
+    event.preventDefault();
+    try {
+      const response = await axios({
+        method: "post",
+        url: "http://wdassignment.devfl.com/api/login",
+        auth: {
+          username: "test",
+          password: "test"
+        },
+        config: {
+          headers: {
+            "Content-Type": "application/json"
+          }
         }
-      };
+      });
+      window.localStorage.setItem("token", response.data.data.token);
+      console.log(response);
+      alert("You have been successfully logged.");
+      this.props.history.push("/homepage");
+    } catch (err) {
+      if (err.response.status) {
+        this.setState({
+          error: "Something went wrong.Try again."
+        });
+      }
+    }
+  };
   render() {
-      const {username,password}= this.state;
+    const { username, password } = this.state;
     return (
       <StyledWrapper>
-          <form onSubmit={this.onSubmit}>
-            <FormInput
-              type="text"
-              placeholder="Enter username"
-              value={username}
-              onChange={this.handleUserNameInput}
-            />
-            <FormInput
-              type="password"
-              placeholder="Enter password"
-              value={password}
-              onChange={this.handleUserPasswordInput}
-            />
-          </form>
-            <StyledButton>LOG IN</StyledButton>
+        <form onSubmit={this.onSubmit}>
+          <FormInput
+            type="text"
+            placeholder="Enter username"
+            value={username}
+            onChange={this.handleUserNameInput}
+          />
+          <FormInput
+            type="password"
+            placeholder="Enter password"
+            value={password}
+            onChange={this.handleUserPasswordInput}
+          />
+          {this.state.error}
+          <StyledButton>LOG IN</StyledButton>
+        </form>
       </StyledWrapper>
     );
   }
 }
 
-export default LoginPage;
+export default withRouter(LoginPage);

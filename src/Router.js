@@ -1,11 +1,15 @@
-import { Router } from "@reach/router";
 import React from "react";
+import { Switch, Route } from "react-router-dom";
 import LoginPage from "./containers/LoginPage";
+import Homepage from "./containers/Homepage";
 
-export default () => {
-  return (
-    <Router>
-      <LoginPage path="/login" />
-    </Router>
-  );
-};
+const App = () => (
+  <div>
+    <Switch>
+      <Route exact path="/" component={LoginPage} />
+      <Route path="/homepage" component={Homepage} />
+    </Switch>
+  </div>
+);
+
+export default App;
