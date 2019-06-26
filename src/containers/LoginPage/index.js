@@ -3,7 +3,7 @@ import FormInput from "../../components/FormInput";
 import { StyledWrapper, StyledButton } from "./styles";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
-// import { saveTokenToLocalStorage } from "../../utils";
+import { saveTokenToLocalStorage } from "../../utils";
 
 class LoginPage extends React.Component {
   state = {
@@ -26,17 +26,17 @@ class LoginPage extends React.Component {
         method: "post",
         url: "http://wdassignment.devfl.com/api/login",
         auth: {
-          username: "test",
-          password: "test"
+          username: this.state.username,
+          password: this.state.password
         },
-        config: {
-          headers: {
-            "Content-Type": "application/json"
-          }
+        headers: {
+          Authorization: `Basic ${this.auth}`
         }
       });
-      window.localStorage.setItem("token", response.data.data.token);
-      console.log(response);
+      this.setState({
+        error: null
+      });
+      saveTokenToLocalStorage(response.data.data.token);
       alert("You have been successfully logged.");
       this.props.history.push("/homepage");
     } catch (err) {
