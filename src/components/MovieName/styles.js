@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const Name = styled(Link)`
   display: flex;
-  background-color: rgb(22, 131, 147);
-  color: #fff;
+  background-color: #f2f2f2;
+  color: #168393;
   text-decoration: none;
   border: 1px solid #168393;
   font-size: 20px;

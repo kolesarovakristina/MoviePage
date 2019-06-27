@@ -1,9 +1,9 @@
 import React from "react";
 import Name from "./styles";
 
-const MovieName = ({ id, name, onClick, to, movieTitle }) => {
+const MovieName = ({ id, name, onClick, to }) => {
   return (
-    <Name id={id} onClick={onClick} to={to} movieTitle={movieTitle}>
+    <Name id={id} onClick={onClick} to={to} >
       {name}
     </Name>
   );

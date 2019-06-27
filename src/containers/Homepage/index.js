@@ -16,7 +16,7 @@ class Homepage extends React.Component {
   componentDidMount() {
     const tokenFromStorage = loadTokenFromLocalStorage();
     if (tokenFromStorage) {
-      this.props.history.push("/homepage");
+      this.props.history.push("/dashboard/homepage");
       this.fillMovieName();
     } else {
       this.props.history.push("/");
@@ -42,13 +42,12 @@ class Homepage extends React.Component {
     const { movieName } = this.state;
     return (
       <Wrapper>
-        <Title>Choose movie</Title>
+        <Title>Choose Movie</Title>
         <ContentWrapper>
           {movieName.data.map(id => (
-            <MovieNameWrapper>
+            <MovieNameWrapper key={id}>
               <MovieName
-                to={`/moviedetails/${id}`}
-                key={id}
+                to={`/dashboard/moviedetails/${id}`}
                 id={id}
                 name={id}
               />

@@ -39,7 +39,7 @@ class LoginPage extends React.Component {
       });
       saveTokenToLocalStorage(response.data.data.token);
       alert("You have been successfully logged.");
-      this.props.history.push("/homepage");
+      this.props.history.push("/dashboard/homepage");
     } catch (err) {
       if (err.response.status) {
         this.setState({

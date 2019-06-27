@@ -1,5 +1,6 @@
 import React from "react";
 import MovieDetails from "../../components/MovieDetails";
+import ButtonBack from "../../components/ButtonBack"
 import { Error } from "../../components/MovieDetails/styles";
 import axios from "axios";
 import { getRequestHeaders } from "../../utils";
@@ -43,6 +44,7 @@ class MovieDetailsPage extends React.Component {
     const { name, description, error } = this.state;
     return (
       <div>
+        <ButtonBack/>
         {error ? (
           <Error>{this.state.error}</Error>
         ) : (

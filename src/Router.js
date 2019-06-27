@@ -1,15 +1,18 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route,Redirect } from "react-router-dom";
 import LoginPage from "./containers/LoginPage";
-import Homepage from "./containers/Homepage";
-import MovieDetailsPage from "./containers/MovieDetailsPage";
+import Dashboard from "./containers/Dashboard";
 
 const App = () => (
   <div>
     <Switch>
-      <Route exact path="/" component={LoginPage} />
-      <Route path="/homepage" component={Homepage} />
-      <Route path="/moviedetails/:id" component={MovieDetailsPage} />
+    <Route
+        exact
+        path="/"
+        render={() => <Redirect to="/login" />}
+      />
+      <Route path="/login" component={LoginPage} />
+      <Route path="/dashboard" component={Dashboard} />
     </Switch>
   </div>
 );
