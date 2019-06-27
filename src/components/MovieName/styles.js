@@ -1,22 +1,18 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const Wrapper = styled.div`
+const Name = styled(Link)`
   display: flex;
-  flex-direction: column;
-  margin: auto;
-  align-items: center;
-  width: 70%;
-  background-color: white;
-  color: rgb(22, 131, 147);
-  border: 1px solid rgb(22, 131, 147);
-  &:hover {
-    background-color: rgb(22, 131, 147);
-    color: white;
-  }
-`;
-export const Title = styled(Link)`
+  background-color: rgb(22, 131, 147);
+  color: #fff;
+  text-decoration: none;
+  border: 1px solid #168393;
   font-size: 20px;
   font-weight: bold;
-  padding: 30px;
+  padding: 50px;
+  &:hover {
+    background-color: #fff;
+    color: #168393;
+  }
 `;
+export default Name;

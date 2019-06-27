@@ -1,11 +1,11 @@
 import React from "react";
-import { Wrapper, Title } from "./styles";
+import Name from "./styles";
 
-const MovieName = ({ id, title, onClick, to }) => {
+const MovieName = ({ id, name, onClick, to, movieTitle }) => {
   return (
-    <Title id={id} onClick={onClick} to={to}>
-      {title}
-    </Title>
+    <Name id={id} onClick={onClick} to={to} movieTitle={movieTitle}>
+      {name}
+    </Name>
   );
 };
 export default MovieName;

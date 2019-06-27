@@ -3,14 +3,15 @@ import axios from "axios";
 import { withRouter } from "react-router-dom";
 import MovieName from "../../components/MovieName";
 import { getRequestHeaders, loadTokenFromLocalStorage } from "../../utils";
-import Wrapper from "./styles";
+import { ContentWrapper, Wrapper, MovieNameWrapper, Title } from "./styles";
+
 class Homepage extends React.Component {
   state = {
     movieName: {
       data: []
     },
     error: null,
-    id: ""
+    id: null
   };
   componentDidMount() {
     const tokenFromStorage = loadTokenFromLocalStorage();
@@ -37,22 +38,24 @@ class Homepage extends React.Component {
       }
     }
   };
-
   render() {
-    console.log("pica", this.state.id);
-    const { onClick } = this.props;
+    const { movieName } = this.state;
     return (
-      <div>
-        {this.state.movieName.data.map(item => (
-          <MovieName
-            key={item}
-            id={item}
-            title={item}
-            to={`/movieDetails/${this.state.id}`}
-            onClick={onClick}
-          />
-        ))}
-      </div>
+      <Wrapper>
+        <Title>Choose movie</Title>
+        <ContentWrapper>
+          {movieName.data.map(id => (
+            <MovieNameWrapper>
+              <MovieName
+                to={`/moviedetails/${id}`}
+                key={id}
+                id={id}
+                name={id}
+              />
+            </MovieNameWrapper>
+          ))}
+        </ContentWrapper>
+      </Wrapper>
     );
   }
 }

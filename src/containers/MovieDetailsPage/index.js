@@ -1,8 +1,8 @@
 import React from "react";
+import MovieDetails from "../../components/MovieDetails";
+import { Error } from "../../components/MovieDetails/styles";
 import axios from "axios";
 import { getRequestHeaders } from "../../utils";
-import MovieDetails from "../../components/MovieDetails";
-import Homepage from "../Homepage";
 
 class MovieDetailsPage extends React.Component {
   state = {
@@ -10,39 +10,44 @@ class MovieDetailsPage extends React.Component {
     error: null,
     id: null
   };
+  componentDidMount() {
+    this.fillMovieDetails();
+  }
 
   fillMovieDetails = async () => {
     const id = this.props.match.params.id;
-    this.setState({ id });
-
-    console.log("id", id);
     try {
       const response = await axios({
         method: "get",
         url: `http://wdassignment.devfl.com/api/movie?id=${id}`,
         headers: getRequestHeaders()
       });
-      console.log("id", response.data.id);
-      this.setState({ movieDetails: response.data, error: null });
+      this.setState({
+        movieDetails: response.data,
+        error: null
+      });
+      this.setState({
+        name: this.state.movieDetails.data.name,
+        description: this.state.movieDetails.data.description
+      });
     } catch (err) {
       if (err.response.status) {
         this.setState({
-          error: "Something went wrong.Try again."
+          error: "No data displayed."
         });
       }
     }
   };
+
   render() {
+    const { name, description, error } = this.state;
     return (
       <div>
-        <Homepage
-          id={this.state.id}
-          name={this.state.movieDetails.name}
-          description={this.state.movieDetails.description}
-          onClick={e => {
-            this.fillMovieDetails(e.target.id);
-          }}
-        />
+        {error ? (
+          <Error>{this.state.error}</Error>
+        ) : (
+          <MovieDetails title={name} description={description} />
+        )}
       </div>
     );
   }

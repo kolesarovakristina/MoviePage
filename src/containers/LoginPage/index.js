@@ -1,9 +1,10 @@
 import React from "react";
 import FormInput from "../../components/FormInput";
-import { StyledWrapper, StyledButton } from "./styles";
+import { StyledWrapper, StyledButton, Image, Error } from "./styles";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
 import { saveTokenToLocalStorage } from "../../utils";
+import logo from "../../assets/logo.png";
 
 class LoginPage extends React.Component {
   state = {
@@ -42,15 +43,16 @@ class LoginPage extends React.Component {
     } catch (err) {
       if (err.response.status) {
         this.setState({
-          error: "Something went wrong.Try again."
+          error: "Invalid credentials.Try again."
         });
       }
     }
   };
   render() {
-    const { username, password } = this.state;
+    const { username, password, error } = this.state;
     return (
       <StyledWrapper>
+        <Image src={logo} />
         <form onSubmit={this.onSubmit}>
           <FormInput
             type="text"
@@ -64,7 +66,7 @@ class LoginPage extends React.Component {
             value={password}
             onChange={this.handleUserPasswordInput}
           />
-          {this.state.error}
+          <Error>{error}</Error>
           <StyledButton>LOG IN</StyledButton>
         </form>
       </StyledWrapper>
