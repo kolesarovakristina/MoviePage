@@ -1,11 +1,13 @@
-import React from "react";
+import React, { FC } from "react";
 import { Wrapper, Title, Description } from "./styles";
-import ButtonBack from "../ButtonBack";
 
-const MovieDetails = ({ title, description }) => {
+interface IProps {
+  title: string;
+  description: string;
+}
+const MovieDetails: FC<IProps> = ({ title, description }) => {
   return (
     <Wrapper>
-     
       <Title>{title}</Title>
       <Description>{description}</Description>
     </Wrapper>
