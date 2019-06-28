@@ -1,6 +1,6 @@
 import React from "react";
 import FormInput from "../../components/FormInput";
-import { StyledWrapper, StyledButton, Image, Error } from "./styles";
+import { StyledWrapper, StyledButton, Error } from "./styles";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
 import { saveTokenToLocalStorage } from "../../utils";
@@ -52,7 +52,7 @@ class LoginPage extends React.Component {
     const { username, password, error } = this.state;
     return (
       <StyledWrapper>
-        <Image src={logo} />
+        <img src={logo} alt="logo" />
         <form onSubmit={this.onSubmit}>
           <FormInput
             type="text"

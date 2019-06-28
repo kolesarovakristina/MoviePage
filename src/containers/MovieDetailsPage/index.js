@@ -33,7 +33,7 @@ class MovieDetailsPage extends React.Component {
     } catch (err) {
       if (err.response.status) {
         this.setState({
-          error: "No data displayed."
+          error: "There is no data for this movie."
         });
       }
     }

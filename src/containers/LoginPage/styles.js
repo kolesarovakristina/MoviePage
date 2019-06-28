@@ -12,8 +12,8 @@ export const StyledButton = styled.button`
   width: 108%;
   height: 45px;
   font-size: 14px;
-  border: 1px solid rgb(22, 131, 147);
-  background-color: rgb(22, 131, 147);
+  border: 1px solid #168393;
+  background-color:#168393;
   color: #fff;
   text-transform: uppercase;
   font-weight: bold;
@@ -23,10 +23,9 @@ export const StyledButton = styled.button`
   transition: all 0.15s ease-in-out;
   &:hover {
     background-color: #fff;
-    color: rgb(22, 131, 147);
+    color: #168393;
   }
 `;
-export const Image = styled.img``;
 export const Error = styled.div`
   color: #ff4d4d;
   text-align: center;
